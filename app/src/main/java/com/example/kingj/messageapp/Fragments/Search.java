@@ -63,6 +63,7 @@ public class Search extends Fragment {
 
 
 
+
         Call<RecentPojo> call= ApiClient.getService().getRecent(type,page);
 
         call.enqueue(new Callback<RecentPojo>() {
