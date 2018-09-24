@@ -9,12 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Toast;
 
 import com.example.kingj.messageapp.ApiClient;
 import com.example.kingj.messageapp.MoviesAdapter;
 import com.example.kingj.messageapp.Pojos.RecentPojo;
-import com.example.kingj.messageapp.Pojos.Result;
+import com.example.kingj.messageapp.Pojos.RecentResult;
 import com.example.kingj.messageapp.R;
 
 import java.util.ArrayList;
@@ -32,10 +33,15 @@ public class TopRated extends Fragment {
     RecyclerView recyclerView;
     MoviesAdapter adapter;
     RecentPojo result;
+    Boolean isScrolling=false;
+    long totalPage;
+    int totalItems;
+    int currentItems;
+    int scrolledoutitems;
     String type="top_rated";
     int page=1;
 
-    List<Result> movies=new ArrayList<>();
+    List<RecentResult> movies=new ArrayList<>();
 
 
     public TopRated() {
@@ -55,7 +61,7 @@ public class TopRated extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
-        LinearLayoutManager layoutManager= new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        final LinearLayoutManager layoutManager= new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
 
 
@@ -67,12 +73,14 @@ public class TopRated extends Fragment {
                 if(response.body()!=null)
                 {
                     result=response.body();
-                    movies.addAll(result.getResults());
+                    movies.clear();
+                    movies.addAll(result.getRecentResults());
                     adapter.notifyDataSetChanged();
+                    totalPage=result.getTotalPages();
                 }
                 else
                 {
-                    Toast.makeText(getContext(),"No Result",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"No RecentResult",Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -84,7 +92,66 @@ public class TopRated extends Fragment {
             }
         });
 
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if(newState== AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
+                {
+                    isScrolling=true;
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                currentItems=layoutManager.getChildCount();
+                totalItems=layoutManager.getItemCount();
+                scrolledoutitems=layoutManager.findFirstVisibleItemPosition();
+
+                if(isScrolling&&(currentItems+scrolledoutitems==totalItems) && page<totalPage)
+                {
+                    page=page+1;
+                    isScrolling=false;
+                    fetchData(page);
+
+                }
+            }
+        });
+
         return output;
+    }
+
+    void fetchData(long fpage)
+    {
+        Call<RecentPojo> call= ApiClient.getService().getRecent(type,fpage);
+
+        call.enqueue(new Callback<RecentPojo>() {
+            @Override
+            public void onResponse(Call<RecentPojo> call, Response<RecentPojo> response) {
+                if(response.body()!=null)
+                {
+                    result=response.body();
+//                    movies.clear();
+                    movies.addAll(result.getRecentResults());
+                    adapter.notifyDataSetChanged();
+//                    totalPage=result.getTotalPages();
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"No RecentResult",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RecentPojo> call, Throwable t) {
+                Log.i("Error","= " + t.getMessage());
+
+                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }

@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.kingj.messageapp.Pojos.Result;
+import com.example.kingj.messageapp.Pojos.RecentResult;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -15,10 +15,10 @@ import java.util.List;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesViewHolder>  {
 
     Context context;
-    List<Result> topRated;
+    List<RecentResult> topRated;
     String url="http://image.tmdb.org/t/p/w500";
 
-    public MoviesAdapter(Context context, List<Result> movies)
+    public MoviesAdapter(Context context, List<RecentResult> movies)
     {
         this.context=context;
         topRated=movies;
@@ -37,7 +37,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesViewHolder>  {
     @Override
     public void onBindViewHolder(@NonNull MoviesViewHolder holder, int position) {
 
-        Result recent = topRated.get(position);
+        RecentResult recent = topRated.get(position);
 
         holder.title.setText(recent.getTitle());
         String avb = recent.getTitle();

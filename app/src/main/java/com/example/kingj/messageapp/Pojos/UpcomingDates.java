@@ -2,14 +2,15 @@
 package com.example.kingj.messageapp.Pojos;
 
 
+import com.google.gson.annotations.Expose;
 
 
 @SuppressWarnings("unused")
-public class Dates {
+public class UpcomingDates {
 
-
+    @Expose
     private String maximum;
-
+    @Expose
     private String minimum;
 
     public String getMaximum() {

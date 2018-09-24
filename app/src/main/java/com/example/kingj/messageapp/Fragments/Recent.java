@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,7 @@ import android.widget.Toast;
 import com.example.kingj.messageapp.ApiClient;
 import com.example.kingj.messageapp.MoviesAdapter;
 import com.example.kingj.messageapp.Pojos.RecentPojo;
-import com.example.kingj.messageapp.Pojos.Result;
+import com.example.kingj.messageapp.Pojos.RecentResult;
 import com.example.kingj.messageapp.R;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class Recent extends Fragment {
     String type="now_playing";
     int page=1;
 
-    List<Result> movies=new ArrayList<>();
+    List<RecentResult> movies=new ArrayList<>();
 
     public Recent() {
         // Required empty public constructor
@@ -67,12 +66,13 @@ public class Recent extends Fragment {
                 if(response.body()!=null)
                 {
                     result=response.body();
-                    movies.addAll(result.getResults());
+                    movies.clear();
+                    movies.addAll(result.getRecentResults());
                     adapter.notifyDataSetChanged();
                 }
                 else
                 {
-                    Toast.makeText(getContext(),"No Result",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"No RecentResult",Toast.LENGTH_LONG).show();
                 }
             }
 

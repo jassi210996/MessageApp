@@ -5,7 +5,7 @@ import java.util.List;
 
 
 @SuppressWarnings("unused")
-public class Result {
+public class RecentResult {
 
 
     private Boolean adult;

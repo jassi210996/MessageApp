@@ -1,26 +1,28 @@
 
 package com.example.kingj.messageapp.Pojos;
 
+import com.example.kingj.messageapp.Fragments.Recent;
+
 import java.util.List;
 
 public class RecentPojo {
 
-    private Dates dates;
+    private RecentDates recent_dates;
 
     private Long page;
 
-    private List<Result> results;
+    private List<RecentResult> results;
 
-    private Long totalPages;
+    private Long total_pages;
 
-    private Long totalResults;
+    private Long total_results;
 
-    public Dates getDates() {
-        return dates;
+    public RecentDates getRecentDates() {
+        return recent_dates;
     }
 
-    public void setDates(Dates dates) {
-        this.dates = dates;
+    public void setRecentDates(RecentDates recentDates) {
+        this.recent_dates = recentDates;
     }
 
     public Long getPage() {
@@ -31,28 +33,28 @@ public class RecentPojo {
         this.page = page;
     }
 
-    public List<Result> getResults() {
+    public List<RecentResult> getRecentResults() {
         return results;
     }
 
-    public void setResults(List<Result> results) {
-        this.results = results;
+    public void setRecentResults(List<RecentResult> recentResults) {
+        this.results = recentResults;
     }
 
     public Long getTotalPages() {
-        return totalPages;
+        return total_pages;
     }
 
     public void setTotalPages(Long totalPages) {
-        this.totalPages = totalPages;
+        this.total_pages = totalPages;
     }
 
     public Long getTotalResults() {
-        return totalResults;
+        return total_results;
     }
 
     public void setTotalResults(Long totalResults) {
-        this.totalResults = totalResults;
+        this.total_results = totalResults;
     }
 
 }
