@@ -11,9 +11,9 @@ public class DetailsPojo {
     @Expose
     private Boolean adult;
     @SerializedName("backdrop_path")
-    private String backdropPath;
+    private String backdrop_path;
     @SerializedName("belongs_to_collection")
-    private Object belongsToCollection;
+    private Object belongs_to_collection;
     @Expose
     private Long budget;
     @Expose
@@ -23,29 +23,29 @@ public class DetailsPojo {
     @Expose
     private Long id;
     @SerializedName("imdb_id")
-    private String imdbId;
+    private String imdb_id;
     @SerializedName("original_language")
-    private String originalLanguage;
+    private String original_language;
     @SerializedName("original_title")
-    private String originalTitle;
+    private String original_title;
     @Expose
     private String overview;
     @Expose
     private Double popularity;
     @SerializedName("poster_path")
-    private String posterPath;
+    private String poster_path;
     @SerializedName("production_companies")
-    private List<DetailsProductionCompany> productionCompanies;
+    private List<DetailsProductionCompany> production_companies;
     @SerializedName("production_countries")
-    private List<DetailsProductionCountry> productionCountries;
+    private List<DetailsProductionCountry> production_countries;
     @SerializedName("release_date")
-    private String releaseDate;
+    private String release_date;
     @Expose
     private Long revenue;
     @Expose
     private Long runtime;
     @SerializedName("spoken_languages")
-    private List<DetailsSpokenLanguage> spokenLanguages;
+    private List<DetailsSpokenLanguage> spoken_languages;
     @Expose
     private String status;
     @Expose
@@ -55,9 +55,9 @@ public class DetailsPojo {
     @Expose
     private Boolean video;
     @SerializedName("vote_average")
-    private Double voteAverage;
+    private Double vote_average;
     @SerializedName("vote_count")
-    private Long voteCount;
+    private Long vote_count;
 
     public Boolean getAdult() {
         return adult;
@@ -68,19 +68,19 @@ public class DetailsPojo {
     }
 
     public String getBackdropPath() {
-        return backdropPath;
+        return backdrop_path;
     }
 
     public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
+        this.backdrop_path = backdropPath;
     }
 
     public Object getBelongsToCollection() {
-        return belongsToCollection;
+        return belongs_to_collection;
     }
 
     public void setBelongsToCollection(Object belongsToCollection) {
-        this.belongsToCollection = belongsToCollection;
+        this.belongs_to_collection = belongsToCollection;
     }
 
     public Long getBudget() {
@@ -116,27 +116,27 @@ public class DetailsPojo {
     }
 
     public String getImdbId() {
-        return imdbId;
+        return imdb_id;
     }
 
     public void setImdbId(String imdbId) {
-        this.imdbId = imdbId;
+        this.imdb_id = imdbId;
     }
 
     public String getOriginalLanguage() {
-        return originalLanguage;
+        return original_language;
     }
 
     public void setOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
+        this.original_language = originalLanguage;
     }
 
     public String getOriginalTitle() {
-        return originalTitle;
+        return original_title;
     }
 
     public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
+        this.original_title = originalTitle;
     }
 
     public String getOverview() {
@@ -156,35 +156,35 @@ public class DetailsPojo {
     }
 
     public String getPosterPath() {
-        return posterPath;
+        return poster_path;
     }
 
     public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
+        this.poster_path = posterPath;
     }
 
     public List<DetailsProductionCompany> getProductionCompanies() {
-        return productionCompanies;
+        return production_companies;
     }
 
     public void setProductionCompanies(List<DetailsProductionCompany> productionCompanies) {
-        this.productionCompanies = productionCompanies;
+        this.production_companies = productionCompanies;
     }
 
     public List<DetailsProductionCountry> getProductionCountries() {
-        return productionCountries;
+        return production_countries;
     }
 
     public void setProductionCountries(List<DetailsProductionCountry> productionCountries) {
-        this.productionCountries = productionCountries;
+        this.production_countries = productionCountries;
     }
 
     public String getReleaseDate() {
-        return releaseDate;
+        return release_date;
     }
 
     public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+        this.release_date = releaseDate;
     }
 
     public Long getRevenue() {
@@ -204,11 +204,11 @@ public class DetailsPojo {
     }
 
     public List<DetailsSpokenLanguage> getSpokenLanguages() {
-        return spokenLanguages;
+        return spoken_languages;
     }
 
     public void setSpokenLanguages(List<DetailsSpokenLanguage> spokenLanguages) {
-        this.spokenLanguages = spokenLanguages;
+        this.spoken_languages = spokenLanguages;
     }
 
     public String getStatus() {
@@ -244,19 +244,19 @@ public class DetailsPojo {
     }
 
     public Double getVoteAverage() {
-        return voteAverage;
+        return vote_average;
     }
 
     public void setVoteAverage(Double voteAverage) {
-        this.voteAverage = voteAverage;
+        this.vote_average = voteAverage;
     }
 
     public Long getVoteCount() {
-        return voteCount;
+        return vote_count;
     }
 
     public void setVoteCount(Long voteCount) {
-        this.voteCount = voteCount;
+        this.vote_count = voteCount;
     }
 
 }

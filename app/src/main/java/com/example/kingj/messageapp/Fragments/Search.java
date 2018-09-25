@@ -21,6 +21,7 @@ import com.example.kingj.messageapp.Pojos.RecentPojo;
 import com.example.kingj.messageapp.Pojos.RecentResult;
 import com.example.kingj.messageapp.Pojos.UpcomingPojo;
 import com.example.kingj.messageapp.Pojos.UpcomingResult;
+import com.example.kingj.messageapp.Pojos.VideosResult;
 import com.example.kingj.messageapp.R;
 import com.example.kingj.messageapp.SearchMovieAdapter;
 
@@ -48,6 +49,7 @@ public class Search extends Fragment {
     UpcomingPojo result;
     String type="upcoming";
     int page=1;
+
 
     List<UpcomingResult> movies=new ArrayList<>();
 

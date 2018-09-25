@@ -1,17 +1,16 @@
 
 package com.example.kingj.messageapp.Pojos;
 
-
+import java.util.List;
 import com.google.gson.annotations.Expose;
 
-
 @SuppressWarnings("unused")
-public class DetailsGenre {
+public class VideosPojo {
 
     @Expose
     private Long id;
     @Expose
-    private String name;
+    private List<VideosResult> results;
 
     public Long getId() {
         return id;
@@ -21,12 +20,12 @@ public class DetailsGenre {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public List<VideosResult> getResults() {
+        return results;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setResults(List<VideosResult> results) {
+        this.results = results;
     }
 
 }

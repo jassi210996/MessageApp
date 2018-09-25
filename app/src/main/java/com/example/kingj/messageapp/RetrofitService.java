@@ -3,6 +3,7 @@ package com.example.kingj.messageapp;
 import com.example.kingj.messageapp.Pojos.DetailsPojo;
 import com.example.kingj.messageapp.Pojos.RecentPojo;
 import com.example.kingj.messageapp.Pojos.UpcomingPojo;
+import com.example.kingj.messageapp.Pojos.VideosPojo;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -19,4 +20,7 @@ public interface RetrofitService {
 
     @GET("movie/{id}?api_key=d883c71561d799acb1eb729418f054d6&language=en-US")
     Call<DetailsPojo>getDetails(@Path("id") long id);
+
+    @GET("movie/{id}/videos?api_key=d883c71561d799acb1eb729418f054d6&language=en-US")
+    Call<VideosPojo>getTrailer(@Path("id") long id);
 }
