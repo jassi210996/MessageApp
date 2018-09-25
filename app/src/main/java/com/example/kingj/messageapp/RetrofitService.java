@@ -1,5 +1,6 @@
 package com.example.kingj.messageapp;
 
+import com.example.kingj.messageapp.Pojos.DetailsPojo;
 import com.example.kingj.messageapp.Pojos.RecentPojo;
 import com.example.kingj.messageapp.Pojos.UpcomingPojo;
 
@@ -15,4 +16,7 @@ public interface RetrofitService {
 
     @GET("movie/{type}?api_key=d883c71561d799acb1eb729418f054d6&language=en-US&page=?")
     Call<UpcomingPojo>getUpcoming(@Path("type") String type, @Query("page") long page);
+
+    @GET("movie/{id}?api_key=d883c71561d799acb1eb729418f054d6&language=en-US")
+    Call<DetailsPojo>getDetails(@Path("id") long id);
 }

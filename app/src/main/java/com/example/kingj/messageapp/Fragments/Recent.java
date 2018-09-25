@@ -1,6 +1,7 @@
 package com.example.kingj.messageapp.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.kingj.messageapp.ApiClient;
+import com.example.kingj.messageapp.DetailActivity;
+import com.example.kingj.messageapp.MovieClickListner;
 import com.example.kingj.messageapp.MoviesAdapter;
 import com.example.kingj.messageapp.Pojos.RecentPojo;
 import com.example.kingj.messageapp.Pojos.RecentResult;
@@ -32,6 +35,7 @@ public class Recent extends Fragment {
     RecyclerView recyclerView;
     MoviesAdapter adapter;
     RecentPojo result;
+    String ID_K="Id";
     String type="now_playing";
     int page=1;
 
@@ -50,7 +54,16 @@ public class Recent extends Fragment {
 
         recyclerView=output.findViewById(R.id.recyclerview);
 
-        adapter=new MoviesAdapter(getContext(),movies);
+        adapter=new MoviesAdapter(getContext(), movies, new MovieClickListner() {
+            @Override
+            public void onMovieClicked(View view, int position) {
+                Intent intent= new Intent(getContext(), DetailActivity.class);
+                RecentResult recentClicked=movies.get(position);
+                long id = recentClicked.getId();
+                intent.putExtra(ID_K,id);
+                startActivity(intent);
+            }
+        });
 
         recyclerView.setAdapter(adapter);
 

@@ -1,6 +1,7 @@
 package com.example.kingj.messageapp.Fragments;
 
 
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.kingj.messageapp.ApiClient;
@@ -36,6 +38,7 @@ public class Search extends Fragment {
 
 
     long totalpages;
+    ImageView progress;
     boolean isScrolling = false;
     int currentItems;
     int totalItems;
@@ -62,12 +65,45 @@ public class Search extends Fragment {
         recyclerView=output.findViewById(R.id.recyclerview);
 
         adapter=new SearchMovieAdapter(getContext(),movies);
+        progress=output.findViewById(R.id.progressImage);
 
 //        adapter=new MoviesAdapter(getContext(),movies);
 
         recyclerView.setAdapter(adapter);
-        final GridLayoutManager staggeredGridLayoutManager =new GridLayoutManager(getContext(),3,LinearLayoutManager.VERTICAL,false);
+        final GridLayoutManager staggeredGridLayoutManager =new GridLayoutManager(getContext(),3,
+                                                                                     LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
+
+
+
+        Call<UpcomingPojo> call= ApiClient.getService().getUpcoming(type,page);
+
+        call.enqueue(new Callback<UpcomingPojo>() {
+            @Override
+            public void onResponse(Call<UpcomingPojo> call, Response<UpcomingPojo> response) {
+                if(response.body()!=null)
+                {
+
+                    result=response.body();
+                    movies.clear();
+                    movies.addAll(result.getResults());
+                    adapter.notifyDataSetChanged();
+                    totalpages=result.getTotalPages();
+                    progress.setVisibility(View.GONE);
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"No RecentResult",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UpcomingPojo> call, Throwable t) {
+                Log.i("Error","= " + t.getMessage());
+
+                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -95,34 +131,6 @@ public class Search extends Fragment {
         });
 
 
-        Call<UpcomingPojo> call= ApiClient.getService().getUpcoming(type,page);
-
-        call.enqueue(new Callback<UpcomingPojo>() {
-            @Override
-            public void onResponse(Call<UpcomingPojo> call, Response<UpcomingPojo> response) {
-                if(response.body()!=null)
-                {
-                    result=response.body();
-                    movies.clear();
-                    movies.addAll(result.getResults());
-                    adapter.notifyDataSetChanged();
-                }
-                else
-                {
-                    Toast.makeText(getContext(),"No RecentResult",Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UpcomingPojo> call, Throwable t) {
-                Log.i("Error","= " + t.getMessage());
-
-                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
-            }
-        });
-
-
-
         return output;
     }
 
@@ -136,7 +144,6 @@ public class Search extends Fragment {
                 if(response.body()!=null)
                 {
                     result=response.body();
-                    movies.clear();
                     movies.addAll(result.getResults());
                     adapter.notifyDataSetChanged();
                 }

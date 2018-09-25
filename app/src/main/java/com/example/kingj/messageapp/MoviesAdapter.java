@@ -15,12 +15,15 @@ import java.util.List;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesViewHolder>  {
 
     Context context;
+    MovieClickListner listner;
     List<RecentResult> topRated;
+
     String url="http://image.tmdb.org/t/p/w500";
 
-    public MoviesAdapter(Context context, List<RecentResult> movies)
+    public MoviesAdapter(Context context, List<RecentResult> movies,MovieClickListner listner)
     {
         this.context=context;
+        this.listner=listner;
         topRated=movies;
     }
 
@@ -35,7 +38,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesViewHolder>  {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MoviesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MoviesViewHolder holder, int position) {
 
         RecentResult recent = topRated.get(position);
 
@@ -44,6 +47,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesViewHolder>  {
         String imageUrl=recent.getPosterPath();
 
         Picasso.with(context).load(url+imageUrl).into(holder.poster);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listner.onMovieClicked(v,holder.getAdapterPosition());
+            }
+        });
 
     }
 
